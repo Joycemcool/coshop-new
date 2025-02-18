@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Cart from '../models/Cart';
+import CartItem from '../models/CartItem';
 import { BadRequestError, NotFoundError } from '../errors/customErrors';
 
 /**
@@ -57,4 +58,15 @@ export const deleteCart = asyncHandler(async (req: Request, res: Response) => {
 
     await cart.destroy();
     res.status(200).json({ message: 'Cart deleted successfully' });
+});
+
+export const getCartItemsByCartId = asyncHandler(async (req: Request, res: Response) => {
+    const { cart_id } = req.params;
+
+    const cartItems = await CartItem.findAll({ where: { cart_id } });
+    if (!cartItems.length) {
+        throw new NotFoundError('No cart items found for this cart');
+    }
+
+    res.status(200).json(cartItems);
 });

@@ -6,7 +6,8 @@ import {
     getCartById, 
     getAllCarts, 
     updateCart, 
-    deleteCart 
+    deleteCart,
+    getCartItemsByCartId
 } from '../controllers/cartController';
 
 const router = express.Router();
@@ -38,6 +39,17 @@ router.get('/:id',
     param('id').isInt().withMessage('Invalid cart ID'),
     validateRequest,
     getCartById
+);
+
+/**
+ * @route GET /api/carts/:cart_id/items
+ * @desc Get all items for a specific cart
+ * @access Public
+ */
+router.get('/:cart_id/items', 
+    param('cart_id').isInt().withMessage('Invalid cart ID'),
+    validateRequest,
+    getCartItemsByCartId
 );
 
 /**
