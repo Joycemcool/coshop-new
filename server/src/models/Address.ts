@@ -83,13 +83,6 @@ Address.init(
     }
 );
 
-Address.belongsToMany(User, { 
-    through: UserAddress,
-    as: 'users', 
-    foreignKey: 'address_id',
-});
-
-
 Address.hasMany(Order, {
     foreignKey: 'shipping_address_id',
     onUpdate: 'CASCADE',
