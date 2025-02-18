@@ -10,6 +10,7 @@ import cartitemRoutes from './routes/cartitemRoutes';
 import orderitemRoutes from './routes/orderitemRoutes';
 import paymentRoutes from './routes/paymentRoutes';
 import userRoutes from './routes/userRoutes';
+import UserAddressRoutes from './routes/userAddressRoutes';   
 
 import { errorHandler } from './middleware/errorMiddleware';
 
@@ -28,7 +29,8 @@ app.use('/api/cartitems', cartitemRoutes);
 app.use('/api/orderitems', orderitemRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/countries', countryRoutes); // Use country routes
-app.use('/api/users', userRoutes); // Use country routes
+app.use('/api/users', userRoutes); // Use users routes
+app.use('/api/userAddresses', UserAddressRoutes); // Use userAddress routes
 
 // Explicitly cast errorHandler to an ErrorRequestHandler function
 app.use(errorHandler as express.ErrorRequestHandler);
