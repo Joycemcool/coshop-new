@@ -2,7 +2,6 @@
 
 import { DataTypes, Model, Optional } from 'sequelize';
 import db from '../lib/dbConnection';  
-import Address from './Address';
 import Vendor from './Vendor';
 import Customer from './Customer';
 import Order from './Order';

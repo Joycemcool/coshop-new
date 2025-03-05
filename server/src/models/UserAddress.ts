@@ -34,15 +34,5 @@ UserAddress.init(
     }
 );
 
-User.belongsToMany(Address, {
-    through: 'UserAddress',  // Junction table
-    foreignKey: 'user_id',
-});
-
-Address.belongsToMany(User, { 
-    through: 'UserAddress',
-    foreignKey: 'address_id',
-});
-
 
 export default UserAddress;
