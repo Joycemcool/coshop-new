@@ -16,23 +16,34 @@ const asyncHandler = (fn: Function) =>
 
 // Create a new post
 export const createPost = asyncHandler ( async(req: Request, res: Response) => {
-        const { user_id, title, content } = req.body;
-        const post = await Post.create({ user_id, title, content });
+        const { user_id, title, content, location } = req.body;
+        const post = await Post.create({ user_id, title, content, location });
         res.status(201).json(post);
 });
 
 // Get all posts by a specific user
 export const getPostsByUser = asyncHandler( async (req: Request, res: Response) => {
-    const { user_id } = req.params;
+    const { user_id } = req.query;
     if(!user_id) {
         return res.status(400).json({ error: 'User ID is required' });
     }
     // Fetch posts by user
-    const posts = await Post.findAll({ where: { user_id } });
+    const posts = await Post.findAll({ where: { user_id: Number(user_id) } });
     if (posts.length === 0) {
         return res.status(404).json({ error: 'No posts found for this user' });
     }
     res.status(200).json(posts);
+});
+
+
+// Get a post by post_id
+export const getPost = asyncHandler( async (req: Request, res: Response) => {
+    const { post_id } = req.params;
+    const post = await Post.findByPk(post_id);
+    if (!post) {
+        return res.status(404).json({ error: 'Post not found' });
+    }
+    res.status(200).json(post);
 });
 
 // Update a post
