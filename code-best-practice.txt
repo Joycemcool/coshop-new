@@ -1,0 +1,17 @@
+
+1. Import Only Necessary Packages or Components
+    Only import what you use. Avoid importing unused packages, components, or libraries.
+
+2. Database Practices
+    Only insert application-related, reasonable, and meaningful data into the database.
+    Avoid storing test or placeholder data (e.g., Test User, Lorem Ipsum) in production databases.
+    Validate data before inserting it into the database to maintain data integrity.
+
+address: 5 records of halifax stores
+categories: grocery related
+product:change to "products", related to grocery
+stores: 5 real halifax stores
+vendors: No name so far
+
+3. Handle Unused Code
+    If a piece of code is not used but is important to keep, comment it out and provide a detailed reason.

@@ -1,8 +1,11 @@
-import React from 'react'
-import Center from "@/components/Center";
+import React, {useState, useEffect} from 'react'
 import styled from "styled-components";
-import Button from './Button';
 import { FaArrowRight } from 'react-icons/fa';
+import axios from 'axios';
+import Center from "@/components/Center";
+
+import Button from './Button';
+
 
 
 const Bg = styled.div`
@@ -74,6 +77,22 @@ const ArrowRight =styled(FaArrowRight)`
 `;
 
 const Feature = () => {
+  const [users, setUsers] = useState([]);
+
+  // Fetch data from the backend
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/countries'); // Replace with your backend URL
+        setUsers(response.data.data); // Assuming data is under `data.data`
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   return (
     <Center>
         <Bg>
@@ -84,6 +103,7 @@ const Feature = () => {
                     <Desc2>Free shipping all order</Desc2>
                 </DescWrapper>
                 <Button>Co-Shop Now <ArrowRight></ArrowRight> </Button>
+
             </TitleWrapper>
         </Bg>
     </Center>
