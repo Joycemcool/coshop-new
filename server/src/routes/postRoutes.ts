@@ -1,11 +1,13 @@
 import express from 'express';
+import { query } from 'express-validator';
 import { body, param } from 'express-validator';
 import { validateRequest } from '../middleware/validateRequest';
 import { 
     createPost,
     getPostsByUser,
     updatePost,
-    deletePost
+    deletePost,
+    getPost
 } from '../controllers/postController';
 
 const router = express.Router();
@@ -15,7 +17,7 @@ const router = express.Router();
  * @desc Create a new post
  * @access Public
  */
-router.post('/posts', 
+router.post('/', 
     body('user_id').isInt().withMessage('User ID is required'),
     body('title').trim().notEmpty().withMessage('Title is required'),
     body('content').trim().notEmpty().withMessage('Content is required'),
@@ -24,21 +26,29 @@ router.post('/posts',
 );
 
 /**
- * @route GET /api/users/:user_id/posts
+ * @route GET /api/posts?user_id=user_id
  * @desc Get all posts by a specific user
  * @access Public
  */
-router.get('/users/:user_id/posts',    
-    param('user_id').isInt().withMessage('Invalid user ID'),
+router.get('/',    
     validateRequest, 
     getPostsByUser);
+
+/**
+ * @route GET /api/posts/:post_id
+ * @desc Get a post ny ID 
+ * @access Public
+ */
+router.get('/:post_id',    
+    validateRequest, 
+    getPost);
 
 /**
  * @route PUT /api/posts/:post_id
  * @desc Update a post by ID
  * @access Public
  */
-router.put('/posts/:post_id', 
+router.put('/:post_id', 
     body('title').trim().notEmpty().withMessage('Title is required'),
     body('content').trim().notEmpty().withMessage('Content is required'),
     validateRequest,
@@ -49,7 +59,7 @@ router.put('/posts/:post_id',
  * @desc Delete a post by ID
  * @access Public
  */
-router.delete('/posts/:post_id', 
+router.delete('/:post_id', 
     param('post_id').isInt().withMessage('Invalid post ID'),
     validateRequest,
     deletePost

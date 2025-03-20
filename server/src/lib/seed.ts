@@ -16,6 +16,7 @@ import Coupon from '../models/Coupon';
 import Review from '../models/Review';
 import Country from '../models/Country';
 import UserAddress from '../models/UserAddress';
+import Post from '../models/Post';
 
 (async () => {
   try {
@@ -38,20 +39,18 @@ import UserAddress from '../models/UserAddress';
     // Seed Users (Customer and Vendor)
     const users = await User.bulkCreate([
       {
+        user_id: 1,
         name: faker.person.firstName(),
         email: faker.internet.email(),
-        password: faker.internet.password(),
-        phone_number: faker.phone.number(),
-        role: 'customer',
-        isValid: true
+        family_name: faker.person.lastName(),
+        avatar: faker.image.avatar(),
       },
       {
+        user_id: 2,
         name: faker.person.firstName(),
         email: faker.internet.email(),
-        password: faker.internet.password(),
-        phone_number: faker.phone.number(),
-        role: 'vendor',
-        isValid: false
+        family_name: faker.person.lastName(),
+        avatar: faker.image.avatar(),
       },
     ]);
 
@@ -98,7 +97,7 @@ import UserAddress from '../models/UserAddress';
     const address = await Address.create({
       unit_number: '101',
       street_number: '123',
-      address_line_1: 'Main St',
+      address_line: 'Main St',
       city: 'New York',
       state: 'NY',
       postal_code: '10001',
@@ -150,6 +149,27 @@ import UserAddress from '../models/UserAddress';
       rating_score: 5,
       comment: 'Great product!',
     });
+
+    await Post.bulkCreate([
+      {
+        title: 'Fresh Organic Vegetables for Sale',
+        content: 'Locally grown organic vegetables, including carrots, tomatoes, and lettuce. Available for pickup or delivery.',
+        location: 'Toronto, Canada',
+        user_id: users[0].user_id,
+      },
+      {
+        title: 'Discount on Bulk Rice & Lentils',
+        content: 'We are offering a special discount on bulk purchases of rice, lentils, and beans. Contact for more details.',
+        location: 'Vancouver, Canada',
+        user_id: users[1].user_id,
+      },
+      {
+        title: 'Homemade Fresh Bread and Pastries',
+        content: 'Delicious homemade bread and pastries made fresh daily. Perfect for breakfast or snacks.',
+        location: 'New York, USA',
+        user_id: users[0].user_id,
+      },
+    ]);
 
     console.log('Seeding completed successfully.');
   } catch (error) {

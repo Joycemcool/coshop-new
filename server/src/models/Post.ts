@@ -6,6 +6,7 @@ interface IPostAttributes {
     post_id: number;
     title: string;
     content: string;
+    location: string;
     user_id: number;
     createdAt?: Date;
     updatedAt?: Date;
@@ -19,6 +20,7 @@ class Post extends Model<IPostAttributes, IPostCreationAttributes> implements IP
     public post_id!: number;
     public title!: string;
     public content!: string;
+    public location!: string;
     public user_id!: number;
     public createdAt?: Date;
     public updatedAt?: Date;
@@ -39,6 +41,10 @@ Post.init(
         content: {
             type: DataTypes.TEXT,
             allowNull: false,
+        },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: false,   
         },
         user_id: {
             type: DataTypes.INTEGER,

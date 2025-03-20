@@ -9,7 +9,7 @@ export interface AuthenticatedRequest extends Request {
 
 // Middleware to verify JWT
 export const authenticateJWT = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization?.split(' ')[1];  // Extract token from "Bearer <token>"
+    const token = req.cookies.authToken;
 
     if (!token) {
         return next(new UnauthorizedError('Authentication token is required'));
