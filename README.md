@@ -118,6 +118,14 @@
 
    16. npm install express-validator
 
+   17. npm install --save-dev @types/bcrypt npm install bcryptjs ( We use bcryptjs to encript and validate encripted/hashed password )
+   
+   18. npm install --save-dev @type/jsonwebtoken npm install jsonwebtoken ( We use jsonwebtoken to generate JWT token for authentication )
+
+   19. npm install --save-dev @type/cookie-parser npm install cookie-parser ( We use cookie-parser to save JWT token in cookie )
+
+   20. npm install --save-dev @type/multer npm install multer ( We use multer to save image in local storage )
+
 ## License
 
 This work is licensed under CC BY-NC 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc/4.0/

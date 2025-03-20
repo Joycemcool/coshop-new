@@ -9,8 +9,7 @@ interface IAddressAttributes {
     address_id: number;
     unit_number: string;
     street_number: string;
-    address_line_1: string;
-    address_line_2?: string;
+    address_line: string;
     city: string;
     state: string;
     postal_code: string;
@@ -20,15 +19,14 @@ interface IAddressAttributes {
 }
 
 // Optional attributes for creating an address
-interface IAddressCreationAttributes extends Optional<IAddressAttributes, 'address_id' | 'address_line_2' |'createdAt' | 'updatedAt'> {}
+interface IAddressCreationAttributes extends Optional<IAddressAttributes, 'address_id' |'createdAt' | 'updatedAt'> {}
 
 // Define the Address model
 class Address extends Model<IAddressAttributes, IAddressCreationAttributes> implements IAddressAttributes {
     public address_id!: number;
     public unit_number!: string;
     public street_number!: string;
-    public address_line_1!: string;
-    public address_line_2?: string;
+    public address_line!: string;
     public city!: string;
     public state!: string;
     public postal_code!: string;
@@ -53,12 +51,9 @@ Address.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        address_line_1: {
+        address_line: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        address_line_2: {
-            type: DataTypes.STRING,
         },
         city: {
             type: DataTypes.STRING,

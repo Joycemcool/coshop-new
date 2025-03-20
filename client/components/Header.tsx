@@ -45,6 +45,7 @@ export default function Header() {
                             {/* <StyledLink href={'/product/66c612c65ceffddc41609ed4'}>Product</StyledLink> */}
                             <StyledLink href={'/cart'}>Shopping Cart</StyledLink>
                             <StyledLink href={'/checkout'}>Checkout</StyledLink>
+                            <StyledLink href={'/dashboard'}>Dashboard</StyledLink>
                         </LinkContainer>
                         <Phone>(298)888-8888</Phone>
                     </Nav>
